@@ -44,12 +44,27 @@ let view =
   ];
 };
 
+let add_button = inject =>
+  Widgets.button_named(
+    Icons.star,
+    _ => inject(UpdateAction.FinishImportScratchpad(None)),
+    ~tooltip="Add Scratchpad",
+  );
+
+let remove_button = inject =>
+  Widgets.button_named(
+    Icons.star,
+    _ => inject(UpdateAction.FinishImportScratchpad(None)),
+    ~tooltip="Remove Scratchpad",
+  );
+
 let export_button = (inject: Update.t => Ui_effect.t(unit)) =>
   Widgets.button_named(
     Icons.export,
     _ => inject(Export(ExportScratchSlide)),
     ~tooltip="Export Scratchpad",
   );
+
 let import_button = inject =>
   Widgets.file_select_button_named(
     "import-scratchpad",

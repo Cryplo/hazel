@@ -454,6 +454,23 @@ let apply = (model: Model.t, update: t, ~schedule_action): Result.t(Model.t) => 
           data,
         );
       Model.save_and_return({...model, editors});
+    | AppendScratchpad =>
+      let editors = switch(model.editors){
+        | Editors.Scratch(n, slides) => Some(Editors.Scratch(n, List.append(slides, [Editor.init(
+          PersistentZipper.deserialize("((selection((focus Left)(content())(mode \
+               Normal)))(backpack())(relatives((siblings((((Grout((id \
+               e87c8d67-9374-4a6f-ba01-5ec8f300b924)(shape \
+               Convex))))))(ancestors())))(caret Outer))"),
+          ~settings = CoreSettings.on
+        )])))
+        | Documentation(_, _)
+        | Exercises(_, _, _) => None
+      };
+      switch(editors) => {
+        | Some(_) => Model.save_and_return({...model, editors})
+        | None =>
+      };
+      
     | Export(ExportPersistentData) =>
       Model.save(model);
       export_persistent_data();

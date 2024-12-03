@@ -73,6 +73,7 @@ type t =
   // editors: scratchmode only
   | InitImportScratchpad([@opaque] Js_of_ocaml.Js.t(Js_of_ocaml.File.file))
   | FinishImportScratchpad(option(string))
+  | AppendScratchpad
   | SwitchScratchSlide(int)
   /* editor */
   | TAB
@@ -134,6 +135,7 @@ let is_edit: t => bool =
   | StepperAction(_)
   | FinishImportAll(_)
   | FinishImportScratchpad(_)
+  | AppendScratchpad
   | ResetCurrentEditor
   | Reset
   | TAB => true
@@ -194,6 +196,7 @@ let reevaluate_post_update: t => bool =
   | ToggleStepper(_)
   | FinishImportAll(_)
   | FinishImportScratchpad(_)
+  | AppendScratchpad
   | ResetCurrentEditor
   | SwitchScratchSlide(_)
   | SwitchDocumentationSlide(_)
@@ -230,6 +233,7 @@ let should_scroll_to_caret =
   | ToggleStepper(_)
   | StepperAction(_, StepBackward | StepForward(_)) => false
   | FinishImportScratchpad(_)
+  | AppendScratchpad
   | FinishImportAll(_)
   | ResetCurrentEditor
   | SwitchEditor(_)
