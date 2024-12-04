@@ -46,9 +46,9 @@ let view =
 
 let add_button = inject =>
   Widgets.button_named(
-    Icons.star,
-    _ => inject(UpdateAction.FinishImportScratchpad(None)),
-    ~tooltip="Add Scratchpad",
+    Icons.plus,
+    _ => inject(UpdateAction.AppendScratchpad),
+    ~tooltip="Append Scratchpad",
   );
 
 let remove_button = inject =>

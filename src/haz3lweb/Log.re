@@ -11,6 +11,7 @@ let is_action_logged: UpdateAction.t => bool =
   | Export(_)
   | FinishImportAll(_)
   | FinishImportScratchpad(_)
+  | AppendScratchpad
   | Benchmark(_)
   | DebugConsole(_)
   | Startup => false
