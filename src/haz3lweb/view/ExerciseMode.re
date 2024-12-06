@@ -299,7 +299,7 @@ let instructor_grading_export = (inject: UpdateAction.t => Ui_effect.t(unit)) =>
 
 let export_submission = (inject: UpdateAction.t => Ui_effect.t(unit)) =>
   Widgets.button_named(
-    Icons.star,
+    Icons.export,
     _ => inject(Export(Submission)),
     ~tooltip="Export Submission",
   );
