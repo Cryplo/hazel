@@ -125,16 +125,18 @@ let item_group = (~inject as _, name: string, ts) => {
   div_c("group", [div_c("name", [text(name)]), div_c("contents", ts)]);
 };
 
+let slides_group_scratch = (~inject) =>
+  item_group(
+    ~inject,
+    "Slides",
+    [ScratchMode.add_button(inject), ScratchMode.remove_button(inject)],
+  );
+
 let file_group_scratch = (~inject) =>
   item_group(
     ~inject,
     "File",
-    [
-      ScratchMode.add_button(inject),
-      ScratchMode.remove_button(inject),
-      ScratchMode.export_button(inject),
-      ScratchMode.import_button(inject),
-    ],
+    [ScratchMode.export_button(inject), ScratchMode.import_button(inject)],
   );
 
 let reset_group_scratch = (~inject) =>
@@ -176,6 +178,7 @@ let dev_group_exercises = (~inject) =>
 let file_menu = (~inject, ~settings: Settings.t, editors: Editors.t) =>
   switch (editors) {
   | Scratch(_) => [
+      slides_group_scratch(~inject),
       file_group_scratch(~inject),
       reset_group_scratch(~inject),
     ]
